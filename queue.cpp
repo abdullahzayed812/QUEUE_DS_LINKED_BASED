@@ -25,3 +25,38 @@ void append(QueueEntry e, Queue* pq) {
   pn = nullptr;
   free(pn);
 }
+
+void serve(QueueEntry* pe, Queue* pq) {
+  QueueNode* pn = pq->front;
+  *pe = pn->entry;
+  pq->front = pn->next;
+  free(pn);
+
+  if (!pq->front) {
+    pq->rear = nullptr;
+  }
+
+  pq->size--;
+}
+
+bool queueFull(Queue* pq) { return 0; }
+
+bool queueEmpty(Queue* pq) { return !pq->front; }
+
+int queueSize(Queue* pq) { return pq->size; }
+
+void clearQueue(Queue* pq) {
+  while (pq->front) {
+    pq->rear = pq->front->next;
+    free(pq->front);
+    pq->front = pq->rear;
+  }
+
+  pq->size = 0;
+}
+
+void traverseQueue(Queue* pq, void (*pf)(QueueEntry pe)) {
+  for (QueueNode* pn = pq->front; pn; pn = pn->next) {
+    (*pf)(pn->entry);
+  }
+}

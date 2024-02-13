@@ -20,6 +20,7 @@ void serve(QueueEntry* e, Queue* pq);
 bool queueFull(Queue* pq);
 bool queueEmpty(Queue* pq);
 int queueSize(Queue* pq);
+void clearQueue(Queue*);
 void traverseQueue(Queue* pq, void (*pf)(QueueEntry e));
 
 #endif
